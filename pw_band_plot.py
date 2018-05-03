@@ -6,6 +6,10 @@
 import numpy as np
 
 feig=open('bd.dat')
+ymin=-10
+ymax=8
+nband=26 # this is the valence band number, for insulators only
+dline=20 # vertical line intervals
 
 l=feig.readline()
 nbnd=int(l.split(',')[0].split('=')[1])
@@ -34,13 +38,10 @@ F=plt.gcf()
 lw=1.2 # line width
 
 plt.xlim([0,nks-1]) # 201 points
-ymin=-10
-ymax=8
 plt.ylim([ymin,ymax])
 #plt.xlabel(r'$k (\AA^{-1})$',fontsize=16)
 plt.ylabel(r' E (eV) ',fontsize=16)
 
-nband=26  # this is the valence band index
 eig_vbm=max(eig[:,nband-1])
 eig_cbm=min(eig[:,nband])
 Gap=eig_cbm-eig_vbm
@@ -49,10 +50,10 @@ plt.title("Band gap="+str(Gap)+" eV")  # for insulators only
 for i in range(nbnd):
     line1=plt.plot( eig[:,i]-eig_vbm,color='r',linewidth=lw ) 
 
-i=20 # vertical line intervals
-while i<nks-1:
-    plt.axvline(x=i, ymin=ymin, ymax=ymax,linewidth=lw,color='black')
-    i=i+20
+vline=dline
+while vline<nks-1:
+    plt.axvline(x=vline, ymin=ymin, ymax=ymax,linewidth=lw,color='black')
+    vline=vline+dline
 
 plt.xticks( np.arange(0,140,20), (r'${\Gamma}$', 'X', 'M', r'${\Gamma}$', 'Z',
            'R','A','Z','X','R','M','A') )
