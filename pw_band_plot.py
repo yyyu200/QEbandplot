@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul 13 11:45:32 2016
-
-@author: Think
+@author: yyyu200@163.com
 """
 
 import numpy as np
@@ -71,7 +69,7 @@ while i<220:
 plt.xticks( np.arange(0,140,20), (r'${\Gamma}$', 'X', 'M', r'${\Gamma}$', 'Z',
            'R','A','Z','X','R','M','A') )
 
-plt.savefig('pwband.pdf',dpi=500)
+plt.savefig('pwband.png',dpi=500)
 
 
 
