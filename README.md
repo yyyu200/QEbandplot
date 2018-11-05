@@ -10,4 +10,4 @@ run as:
 `python pw_band_plot.py`
 
 Dependencies:
-.[Matplotlib].(https://matplotlib.org/)
+[Matplotlib] (https://matplotlib.org/)
