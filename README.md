@@ -7,5 +7,7 @@ in the input of bands.x
 
 
 run as:  
-python pw_band_plot.py  
+`python pw_band_plot.py`
 
+Dependencies:
+.[Matplotlib].(https://matplotlib.org/)
