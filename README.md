@@ -10,6 +10,7 @@ run as:
 `python pw_band_plot.py`
 
 Dependencies:
+
 Numpy
 
 [Matplotlib](https://matplotlib.org/).
