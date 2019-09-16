@@ -19,7 +19,11 @@ eig=np.zeros((nks,nbnd),dtype=float)
 for i in range(nks):
     l=feig.readline()
     count=0
-    for j in range(nbnd//10+1):
+    if nbnd%10==0:
+        n=nbnd//10
+    else:
+        n=nbnd//10+1
+    for j in range(n):
         l=feig.readline()
         for k in range(len(l.split())):
             eig[i][count]=l.split()[k]
