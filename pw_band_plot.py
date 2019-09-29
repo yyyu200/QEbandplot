@@ -26,7 +26,7 @@ for i in range(nks):
     for j in range(n):
         l=feig.readline()
         for k in range(len(l.split())):
-            eig[i][count]=l.split()[k]
+            eig[i][count]=l.split()[k]  # str to float
             count=count+1
             
 feig.close()
