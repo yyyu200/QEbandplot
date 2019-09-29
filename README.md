@@ -9,6 +9,10 @@ in the input of bands.x
 run as:  
 `python pw_band_plot.py`
 
+example:
+
+![pwband](./pwband.png)
+
 Dependencies:
 
 Numpy
