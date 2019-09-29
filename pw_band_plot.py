@@ -9,7 +9,6 @@ feig=open('bd.dat')
 ymin=-10
 ymax=8
 nband=26 # this is the valence band number, for insulators only
-dline=20 # vertical line intervals
 
 l=feig.readline()
 nbnd=int(l.split(',')[0].split('=')[1])
@@ -54,13 +53,14 @@ plt.title("Band gap="+str(Gap)+" eV")  # for insulators only
 for i in range(nbnd):
     line1=plt.plot( eig[:,i]-eig_vbm,color='r',linewidth=lw ) 
 
-vline=dline
-while vline<nks-1:
+vlines= np.arange(0,nks,20)
+for vline in vlines:
     plt.axvline(x=vline, ymin=ymin, ymax=ymax,linewidth=lw,color='black')
-    vline=vline+dline
 
-plt.xticks( np.arange(0,140,20), (r'${\Gamma}$', 'X', 'M', r'${\Gamma}$', 'Z',
+plt.xticks( vlines, (r'${\Gamma}$', 'X', 'M', r'${\Gamma}$', 'Z',
            'R','A','Z','X','R','M','A') )
+
+plt.text(180.0, 3, '$SnO_{2}$ rutile', fontsize=12, color='mediumvioletred')
 
 plt.savefig('pwband.png',dpi=500)
 
