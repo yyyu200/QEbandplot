@@ -14,14 +14,15 @@ l=feig.readline()
 nbnd=int(l.split(',')[0].split('=')[1])
 nks=int(l.split(',')[1].split('=')[1].split('/')[0])
 
+npl=10 # number per line
 eig=np.zeros((nks,nbnd),dtype=float)
 for i in range(nks):
     l=feig.readline()
     count=0
-    if nbnd%10==0:
-        n=nbnd//10
+    if nbnd%npl==0:
+        n=nbnd//npl
     else:
-        n=nbnd//10+1
+        n=nbnd//npl+1
     for j in range(n):
         l=feig.readline()
         for k in range(len(l.split())):
