@@ -35,17 +35,20 @@ def parse_filband(feig, npl=10):
 
     return eig, nbnd, nks
 
-
-ymin=-10
-ymax=8
-nband=26 # this is the valence band number, for insulators only
 do_find_gap=True
+if do_find_gap:
+    nvband=26 # valence band number, for insulators only
+else:
+    e_ref=0.0 # set to fermi-level in scf output for metal, use with do_find_gap=False
+
+ymin=-10  # y range in plot
+ymax=10
+lw=1.2 # line width
 
 p1=plt.subplot(1, 1, 1)
 
 F=plt.gcf()
 #F.set_size_inches([5,5])
-lw=1.2 # line width
 
 eig, nbnd, nks=parse_filband('bd.dat')
 
@@ -55,15 +58,14 @@ plt.ylim([ymin,ymax])
 plt.ylabel(r' E (eV) ',fontsize=16)
 
 if do_find_gap:
-    eig_vbm=max(eig[:,nband-1])
-    eig_cbm=min(eig[:,nband])
+    eig_vbm=max(eig[:,nvband-1])
+    eig_cbm=min(eig[:,nvband])
     Gap=eig_cbm-eig_vbm
     plt.title("Band gap= %.4f eV" % (Gap))  # for insulators only
-else:
-    eig_vbm=0.0
+    e_ref=eig_vbm
 
 for i in range(nbnd):
-    line1=plt.plot( eig[:,i]-eig_vbm,color='r',linewidth=lw ) 
+    line1=plt.plot( eig[:,i]-e_ref,color='r',linewidth=lw ) 
 
 vlines= np.arange(0,nks,20)
 for vline in vlines:
@@ -72,7 +74,7 @@ for vline in vlines:
 plt.xticks( vlines, (r'${\Gamma}$', 'X', 'M', r'${\Gamma}$', 'Z',
            'R','A','Z','X','R','M','A') )
 
-plt.text(180.0, 3, '$SnO_{2}$ rutile', fontsize=12, color='black')
+plt.text(0.0, 8, '$SnO_{2}$ rutile', fontsize=12, color='black')
 
 plt.savefig('pwband.png',dpi=500)
 
