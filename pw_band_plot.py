@@ -67,7 +67,7 @@ if do_find_gap:
 for i in range(nbnd):
     line1=plt.plot( eig[:,i]-e_ref,color='r',linewidth=lw ) 
 
-vlines= np.arange(0,nks,20)
+vlines= np.arange(0,nks,20) # positions of vertial lines
 for vline in vlines:
     plt.axvline(x=vline, ymin=ymin, ymax=ymax,linewidth=lw,color='black')
 
