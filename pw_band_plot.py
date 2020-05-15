@@ -51,11 +51,8 @@ F=plt.gcf()
 
 eig, nbnd, nks=parse_filband('bd.dat')
 
-if nbnd < nvband:
-    print("warning: only partial valence bands are plotted, increase nvband.")
-elif nbnd == nvband:
-    print("warning: only valence bands are plotted, increase nvband.")
-
+if nbnd <= nvband:
+    print("warning: nvband should be less than the calculated band.")
 
 plt.xlim([0,nks-1]) # k-points
 plt.ylim([ymin,ymax])
