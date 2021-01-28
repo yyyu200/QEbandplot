@@ -84,10 +84,18 @@ vlines= np.arange(0,nks,20) # positions of vertical lines, or specified by [0, 2
 for vline in vlines:
     plt.axvline(x=vline, ymin=ymin, ymax=ymax,linewidth=lw,color='black')
 
-plt.xticks( vlines, (r'${\Gamma}$', 'X', 'M', r'${\Gamma}$', 'Z',
-           'R','A','Z','X','R','M','A') )
+xlabeltext=[r'${\Gamma}$', 'X', 'M', r'${\Gamma}$', 'Z', 'R','A','Z','X','R','M','A']
+if len(xlabeltext)<len(vlines):
+    for i in range(len(vlines)-len(xlabeltext)):
+        xlabeltext.append('X')
+elif len(xlabeltext)>len(vlines):
+    xlabeltext=xlabeltext[0:len(vlines)]
 
-plt.text(4, 8, '$SnO_{2}$ rutile', fontsize=12, color='black', bbox=dict(facecolor='white',alpha=0.99,edgecolor='black') )
+assert len(xlabeltext)==len(vlines)
+
+plt.xticks( vlines, xlabeltext)
+
+plt.text(4, 8, 'SnO$_{2}$', fontsize=12, color='black', bbox=dict(facecolor='white',alpha=0.99,edgecolor='black') )
 plt.tight_layout()
 
 plt.savefig('pwband.png',dpi=500)
