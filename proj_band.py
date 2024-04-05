@@ -176,5 +176,5 @@ def draw_proj_band(proj_file, bd_file, fig_file):
     plt.savefig(fig_file,dpi=500)
 
 if __name__ == '__main__':
-    draw_proj_band("sno.projwfc_up", "bd.dat", "pjband.png")
+    draw_proj_band("sno.projwfc_up", "bd2.dat", "pjband.png")
     print("done")
