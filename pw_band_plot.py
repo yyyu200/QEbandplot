@@ -56,19 +56,25 @@ def draw_band(bd_file, fig_file, do_find_gap, e_ref=0.0, nvband=0):
     #F.set_size_inches([5,5])
     
     if nbnd <= nvband:
-        print("warning: nvband should be less than the calculated band.")
+        print("warning: nvband ", nvband," should be less than the calculated band number ", nbnd)
     
     plt.xlim([0,nks-1]) # k-points
     plt.ylim([ymin,ymax])
     #plt.xlabel(r'$k (\AA^{-1})$',fontsize=16)
     plt.ylabel(r' E (eV) ',fontsize=16)
     
-    if do_find_gap and nbnd > nvband: # for insulators only, nvband can be found by gappw.sh(https://github.com/yyyu200/gappw)
-        eig_vbm=max(eig[:,nvband-1])
-        eig_cbm=min(eig[:,nvband])
-        Gap=eig_cbm-eig_vbm
-        plt.title("Band gap= %.4f eV" % (Gap))  
-        e_ref=eig_vbm 
+    if do_find_gap:
+        if nbnd > nvband: # for insulators only, nvband can be found by gappw.sh(https://github.com/yyyu200/gappw)
+            eig_vbm=max(eig[:,nvband-1])
+            eig_cbm=min(eig[:,nvband])
+            gap=eig_cbm-eig_vbm
+            plt.title("Band gap= %.4f eV" % (gap))
+            e_ref=eig_vbm
+        elif nbnd==nvband: # cb not calculated, cannot find gap
+            e_ref=max(eig[:,nvband-1])
+        else:
+            print("set nvband no less than", nbnd)
+            assert None
     
     for i in range(nbnd):
         line1=plt.plot( eig[:,i]-e_ref,color='r',linewidth=lw ) 
@@ -97,6 +103,5 @@ if __name__ == '__main__':
     do_find_gap=True
     #e_ref=0.0 # set to fermi-level in scf output for metal, only applicable for do_find_gap=False
     nvband=26 # valence band number, only applicable for do_find_gap=True
-    
 
     draw_band("bd.dat", "pwband.png", do_find_gap, nvband=nvband)
