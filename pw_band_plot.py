@@ -18,7 +18,7 @@ def parse_filband(feig, npl=10):
     shape = re.split('[,=/]', line)
     nbnd = int(shape[1])
     nks = int(shape[3])
-    eig = np.zeros((nks, nbnd+1), dtype=np.float32)
+    eig = np.zeros((nks, nbnd), dtype=np.float32)
 
     dividend = nbnd
     divisor = npl
