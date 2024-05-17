@@ -136,9 +136,12 @@ def draw_proj_band(proj_file, bd_file, fig_file):
 
     with open(proj_file,'r') as filproj:
         for i in range(nline_io_header-1):
-            l = filproj.readline()
+            l = filproj.readline() # l : natomwfc, nkstot, nbnd
 
         nlorb = int(l.split()[0])
+        if int(l.split()[1]) != nks or int(l.split()[2]) != nbnd:
+            print("Warning: dimention mismatch between proj_file and bd_file!")
+
         check_nlorb=False
         if check_nlorb:
             orb=[['s','p','d'],['s','p']]  # projectors for each element
